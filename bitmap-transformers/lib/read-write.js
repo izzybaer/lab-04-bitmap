@@ -6,7 +6,7 @@ let readWrite = module.exports = {};
 
 readWrite.read = (filePath, callback) => {
  let result =  fs.readFile(filePath, (err, data) => {
-    console.log(typeof data);
-    callback(data);
+    console.log(data);
+    callback(null, data);
   })
 };
