@@ -7,11 +7,11 @@ let filePath = '../assets/house.bmp';
 
 describe('testing read write function', () => {
   it('should return a buffer', (done) => {
-    console.log(filePath);
+    console.log('test', filePath);
     readWrite.read(filePath, (err, data) => {
-      // expect(err).toBe(null);
-      console.log(data);
-      expect(typeof data).toEqual('object');
+      console.log('testing', data);
+      expect(err).toBe(null);
+      expect(Buffer.isBuffer(data)).toEqual(true);
       done();
     })
   })
