@@ -5,7 +5,6 @@ const bitmap = require('./bitmap.js');
 
 let readWrite = module.exports = {};
 
-readWrite.result
 
 readWrite.read = (filePath, callback) => {
   return fs.readFile(filePath, (err, data) => {
@@ -14,7 +13,10 @@ readWrite.read = (filePath, callback) => {
     let colorTable = data.slice(54, 1077);
     let pixelArray = data.slice(1078);
     let image = new bitmap.Constructor(bitmapHeader, dibHeader, colorTable, pixelArray);
-    console.log(image)
+    // console.log(image.colorTable === newColorTable);
+    console.log('colorTable', image.colorTable);
+    let newColorTable = callback(image.colorTable);
+    console.log('newColorTable', newColorTable);
   });
 };
 
