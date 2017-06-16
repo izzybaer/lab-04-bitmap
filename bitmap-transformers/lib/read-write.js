@@ -18,12 +18,9 @@ readWrite.read = (filePath, callback) => {
     let newColorTable = callback(image.colorTable);
     // console.log('newColorTable', newColorTable);
     let newBitmapArr = [].concat(bitmapHeader, dibHeader, colorTable, pixelArray);
-    let x = Buffer.concat(newBitmapArr);
-    console.log('x', x);
-    console.log('newBitmapArr', newBitmapArr);
-
-    let newBitmap = Buffer.from(newBitmapArr);
-    console.log(newBitmap);
+    let transformedImageBuffer = Buffer.concat(newBitmapArr);
+    console.log('x', transformedImageBuffer);
+    readWrite.write('./assets/sample.bmp', data);
   });
 };
 
@@ -31,9 +28,9 @@ readWrite.read = (filePath, callback) => {
 
 // let x = readWrite(../assets/house.bmp);
 // unfinished write code >>>
-readWrite.write = (read, callback) => {
-  return fs.writeFile(fileName, buffer, (err, data) => {
-    console.log(readWrite.read());
-    callback(null, data);
+readWrite.write = (outputPath, buff, callback) => {
+  fs.writeFile(outputPath, buff , (err) =>{
+    if(err) console.error(err);
+    return true;
   });
 };
