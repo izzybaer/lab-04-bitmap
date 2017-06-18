@@ -21,7 +21,9 @@ readWrite.read = (filePath, callback) => {
     let transformedImageBuffer = Buffer.concat(newBitmapArr);
     console.log('x', transformedImageBuffer);
     readWrite.write('./assets/sample.bmp', data);
+    return newColorTable;
   });
+
 };
 
 
