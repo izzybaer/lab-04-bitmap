@@ -1,30 +1,39 @@
+
 'use strict';
 
-const readWrite = require('../lib/read-write.js');
+const transform = require('../lib/transform.js');
 const expect = require('expect');
+const fs = require('fs');
+const read = require('../lib/read-write.js');
 
-let filePath = '../assets/house.bmp';
+let originalFilePath = `${process.cwd()}/assets/bitmap.bmp`;
 
-describe('testing read write function', () => {
-  it('should return a buffer', (done) => {
-    console.log('test', filePath);
-    readWrite.read(filePath, (err, data) => {
-      expect(err).toBe(null);
-      expect(Buffer.isBuffer(data)).toEqual(true);
+describe('testing read write', () => {
+  it('should create a file and delete it after success', (done) => {
+    read.write('../assets/test-file.bmp', 'beepbopboop', (val) =>{
+      expect(val).toEqual(true);
+    });
+    fs.unlink('../assets/test-file.bmp', (err) => {
+      if(err) console.err(err);
       done();
+      return;
     });
   });
 });
 
-// new test to finish
-describe('testing write function', () => {
-  it('should return a buffer', (done) => {
-    console.log('test', filePath);
-    readWrite.read(filePath, (err, data) => {
-      console.log('testing', data);
-      expect(err).toBe(null);
-      expect(Buffer.isBuffer(data)).toEqual(true);
-      done();
-    });
+// describe('testing read write', () => {
+//   it('should read a file', () => {
+//     console.log('originalFilePath', originalFilePath);
+//     expect(read.read(originalFilePath, '', transform.scale, (x,y, val) => val)).toEqual('object');
+//
+//   });
+// });
+
+describe('testing read write', () => {
+  it('should read a file', () => {
+    read.read(originalFilePath, '',
+      transform.scale, (path,buf, val) => {
+        expect(Buffer.isBuffer(buf)).toEqual(true);
+      });
   });
 });
