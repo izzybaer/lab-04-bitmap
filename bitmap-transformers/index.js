@@ -5,6 +5,7 @@ const colorScale = require('./lib/transform.js');
 const bitmapFileRead = require('./lib/read-write.js');
 const bitmap = require('./lib/bitmap.js');
 const filepath = process.argv[2];
+let outputPath = './assets/output.bmp';
 let typeOfTransform;
 
 switch (process.argv[3]) {
@@ -23,7 +24,7 @@ default:
 }
 
 if(typeOfTransform){
-  bitmapFileRead.read(filepath, typeOfTransform);
+  bitmapFileRead.read(filepath, outputPath, typeOfTransform, bitmapFileRead.write);
 }
 else{
   console.log('Incorrect Input');

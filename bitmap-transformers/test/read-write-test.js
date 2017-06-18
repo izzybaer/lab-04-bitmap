@@ -1,49 +1,39 @@
 
 'use strict';
 
-const readWrite = require('../lib/read-write.js');
 const transform = require('../lib/transform.js');
 const expect = require('expect');
 const fs = require('fs');
+const read = require('../lib/read-write.js');
 
-let resultFilePath = `${process.cwd()}/assets/test-sample.bmp`;
 let originalFilePath = `${process.cwd()}/assets/bitmap.bmp`;
 
-// let x = fs.readFile(originalFilePath, function (err, data) {
-//   if (err)  throw err;
-//   console.log(data);
-//
-// });
-
-describe('testing read write function', () => {
-  it('should return a color table', (done) => {
-
-    fs.readFile(originalFilePath, (err, originalFileData) =>{
-
-      fs.readFile(resultFilePath, (err, data) => {
-
-        let resultColorTable = data.slice(54, 1077);
-        let originalColorTable = originalFileData.slice(54,1077);
-
-        transform.scale(originalColorTable);
-
-        expect(resultColorTable).toEqual(originalColorTable);
-        done();
-      });
+describe('testing read write', () => {
+  it('should create a file and delete it after success', (done) => {
+    read.write('../assets/test-file.bmp', 'beepbopboop', (val) =>{
+      expect(val).toEqual(true);
+    });
+    fs.unlink('../assets/test-file.bmp', (err) => {
+      if(err) console.err(err);
+      done();
+      return;
     });
   });
 });
 
+// describe('testing read write', () => {
+//   it('should read a file', () => {
+//     console.log('originalFilePath', originalFilePath);
+//     expect(read.read(originalFilePath, '', transform.scale, (x,y, val) => val)).toEqual('object');
+//
+//   });
+// });
 
-// new test to finish
-describe('testing write function', () => {
-  it('should return a buffer', (done) => {
-    console.log('test', filePath);
-    readWrite.read(filePath, (err, data) => {
-      console.log('testing', data);
-      expect(err).toBe(null);
-      expect(Buffer.isBuffer(data)).toEqual(true);
-      done();
-    });
+describe('testing read write', () => {
+  it('should read a file', () => {
+    read.read(originalFilePath, '',
+      transform.scale, (path,buf, val) => {
+        expect(Buffer.isBuffer(buf)).toEqual(true);
+      });
   });
 });

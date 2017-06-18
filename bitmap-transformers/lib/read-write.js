@@ -6,7 +6,7 @@ const bitmap = require('./bitmap.js');
 let readWrite = module.exports = {};
 
 
-readWrite.read = (filePath, callback) => {
+readWrite.read = (filePath, outputPath, transform, callback) => {
   return fs.readFile(filePath, (err, data) => {
     let bitmapHeader = data.slice(0, 13);
     let dibHeader = data.slice(14, 53);
@@ -15,13 +15,13 @@ readWrite.read = (filePath, callback) => {
     let image = new bitmap.Constructor(bitmapHeader, dibHeader, colorTable, pixelArray);
     // console.log(image.colorTable === newColorTable);
     // console.log('colorTable', image.colorTable);
-    let newColorTable = callback(image.colorTable);
+    let newColorTable = transform(image.colorTable);
     // console.log('newColorTable', newColorTable);
-    let newBitmapArr = [].concat(bitmapHeader, dibHeader, colorTable, pixelArray);
-    let transformedImageBuffer = Buffer.concat(newBitmapArr);
-    console.log('x', transformedImageBuffer);
-    readWrite.write('./assets/sample.bmp', data);
-    return newColorTable;
+    // let newBitmapArr = [].concat(bitmapHeader, dibHeader, colorTable, pixelArray);
+    // let transformedImageBuffer = Buffer.concat(newBitmapArr);
+    // console.log('x', transformedImageBuffer);
+    callback(outputPath, data, (val) => val);
+    return data;
   });
 
 };
@@ -32,7 +32,10 @@ readWrite.read = (filePath, callback) => {
 // unfinished write code >>>
 readWrite.write = (outputPath, buff, callback) => {
   fs.writeFile(outputPath, buff , (err) =>{
-    if(err) console.error(err);
-    return true;
+    if(err) {
+      console.error(err)
+    } else {
+      if(!callback) callback(true)
+    }
   });
 };
