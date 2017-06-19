@@ -1,25 +1,25 @@
 
 'use strict';
 
-const colorScale = require('./lib/transform.js');
-const bitmapFileRead = require('./lib/read-write.js');
-const bitmap = require('./lib/bitmap.js');
+const transform = require('./lib/transform.js');
+const readWrite = require('./lib/read-write.js');
 const filepath = process.argv[2];
-const fs = require('fs');
 
 let outputPath = './assets/output.bmp';
 
 let typeOfTransform;
+let targetColor = 'red';
 
 switch (process.argv[3]) {
 case 'greyscale':
-  typeOfTransform = colorScale.greyScale;
+  typeOfTransform = transform.greyScale;
   break;
 case 'invert':
-  typeOfTransform = colorScale.invert;
+  typeOfTransform = transform.invert;
   break;
 case 'scale':
-  typeOfTransform = colorScale.scale;
+  typeOfTransform = transform.scale;
+  targetColor = process.argv[4].toLowerCase();
   break;
 default:
   typeOfTransform = null;
@@ -27,7 +27,11 @@ default:
 }
 
 if(typeOfTransform) {
-  bitmapFileRead.read(filepath, outputPath, typeOfTransform, bitmapFileRead.write);
+  readWrite.read(filepath, outputPath, typeOfTransform, targetColor, readWrite.write);
 } else {
   console.log('Incorrect Input');
+
 }
+
+}
+

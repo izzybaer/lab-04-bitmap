@@ -15,7 +15,7 @@ describe('testing scale ', () => {
       fs.readFile(resultFilePathScale, (err, data) => {
         let resultColorTable = data.slice(54, 1077);
         let originalColorTable = originalFileData.slice(54, 1077);
-        transform.scale(originalColorTable);
+        transform.scale(originalColorTable, 'blue');
         expect(resultColorTable).toEqual(originalColorTable);
         done();
       });

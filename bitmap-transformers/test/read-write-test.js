@@ -23,8 +23,8 @@ describe('testing read write', () => {
 describe('testing read write', () => {
   it('should read a file', () => {
     read.read(originalFilePath, '',
-    transform.scale, (path, buf, val) => {
-      expect(Buffer.isBuffer(buf)).toEqual(true);
-    });
+      transform.scale, (path, buf) => {
+        expect(Buffer.isBuffer(buf)).toEqual(true);
+      });
   });
 });
