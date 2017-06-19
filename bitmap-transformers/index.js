@@ -30,4 +30,8 @@ if(typeOfTransform) {
   readWrite.read(filepath, outputPath, typeOfTransform, targetColor, readWrite.write);
 } else {
   console.log('Incorrect Input');
+
 }
+
+}
+
