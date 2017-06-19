@@ -11,3 +11,18 @@
 # Next, we wrote the buffer to a new file.
 \n
 # Finally we wrote and ran all of our tests. 
+
+
+# **USAGE** 
+---
+```
+  //In the directory where index.js, invoke index js with the following parameters for scale(red, blue or green. default is red)
+  $ node index.js <path_to_bmp_file> <transform_type> <color>
+
+  //The result is generated in ./assets/output.bmp
+
+  //Sample
+  $ node index.js ./assets/bitmap.bmp scale blue
+
+
+```
