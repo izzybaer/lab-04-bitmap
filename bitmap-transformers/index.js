@@ -23,9 +23,8 @@ default:
   break;
 }
 
-if(typeOfTransform){
+if(typeOfTransform) {
   bitmapFileRead.read(filepath, outputPath, typeOfTransform, bitmapFileRead.write);
-}
-else{
+} else {
   console.log('Incorrect Input');
 }
