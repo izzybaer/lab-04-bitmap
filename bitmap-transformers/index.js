@@ -28,6 +28,3 @@ if(typeOfTransform){
 else{
   console.log('Incorrect Input');
 }
-
-let readFile =  fs.readFile('../assets/house.bmp', (err,data)=> { return data.slice(54, 1078);});
-console.log(readFile);
