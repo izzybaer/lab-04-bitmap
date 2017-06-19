@@ -1,4 +1,3 @@
-
 'use strict';
 
 const transform = require('../lib/transform.js');
@@ -10,7 +9,7 @@ let originalFilePath = `${process.cwd()}/assets/bitmap.bmp`;
 
 describe('testing read write', () => {
   it('should create a file and delete it after success', (done) => {
-    read.write('../assets/test-file.bmp', 'beepbopboop', (val) =>{
+    read.write('../assets/test-file.bmp', 'beepbopboop', (val) => {
       expect(val).toEqual(true);
     });
     fs.unlink('../assets/test-file.bmp', (err) => {
@@ -21,19 +20,11 @@ describe('testing read write', () => {
   });
 });
 
-// describe('testing read write', () => {
-//   it('should read a file', () => {
-//     console.log('originalFilePath', originalFilePath);
-//     expect(read.read(originalFilePath, '', transform.scale, (x,y, val) => val)).toEqual('object');
-//
-//   });
-// });
-
 describe('testing read write', () => {
   it('should read a file', () => {
     read.read(originalFilePath, '',
-      transform.scale, (path,buf, val) => {
-        expect(Buffer.isBuffer(buf)).toEqual(true);
-      });
+    transform.scale, (path, buf, val) => {
+      expect(Buffer.isBuffer(buf)).toEqual(true);
+    });
   });
 });

@@ -1,4 +1,3 @@
-
 'use strict';
 
 const transform = require('../lib/transform.js');
@@ -12,10 +11,10 @@ let resultFilePathInvert = `${process.cwd()}/assets/test-invert-sample.bmp`;
 
 describe('testing scale ', () => {
   it('should scale the colorTable and return true', (done) => {
-    fs.readFile(originalFilePath, (err, originalFileData) =>{
+    fs.readFile(originalFilePath, (err, originalFileData) => {
       fs.readFile(resultFilePathScale, (err, data) => {
         let resultColorTable = data.slice(54, 1077);
-        let originalColorTable = originalFileData.slice(54,1077);
+        let originalColorTable = originalFileData.slice(54, 1077);
         transform.scale(originalColorTable);
         expect(resultColorTable).toEqual(originalColorTable);
         done();
@@ -26,10 +25,10 @@ describe('testing scale ', () => {
 
 describe('testing greyscale ', () => {
   it('should  greyscale the colorTable and return true', (done) => {
-    fs.readFile(originalFilePath, (err, originalFileData) =>{
+    fs.readFile(originalFilePath, (err, originalFileData) => {
       fs.readFile(resultFilePathGreyscale, (err, data) => {
         let resultColorTable = data.slice(54, 1077);
-        let originalColorTable = originalFileData.slice(54,1077);
+        let originalColorTable = originalFileData.slice(54, 1077);
         transform.greyScale(originalColorTable);
         expect(resultColorTable).toEqual(originalColorTable);
         done();
@@ -40,10 +39,10 @@ describe('testing greyscale ', () => {
 
 describe('testing invert ', () => {
   it('should invert the colrTable and return true', (done) => {
-    fs.readFile(originalFilePath, (err, originalFileData) =>{
+    fs.readFile(originalFilePath, (err, originalFileData) => {
       fs.readFile(resultFilePathInvert, (err, data) => {
         let resultColorTable = data.slice(54, 1077);
-        let originalColorTable = originalFileData.slice(54,1077);
+        let originalColorTable = originalFileData.slice(54, 1077);
         transform.invert(originalColorTable);
         expect(resultColorTable).toEqual(originalColorTable);
         done();
