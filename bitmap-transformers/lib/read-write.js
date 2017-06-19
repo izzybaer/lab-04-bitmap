@@ -12,6 +12,7 @@ readWrite.read = (filePath, outputPath, transform, callback) => {
     let colorTable = data.slice(54, 1077);
     let pixelArray = data.slice(1078);
     let image = new bitmap.Constructor(bitmapHeader, dibHeader, colorTable, pixelArray);
+    transform(image.colorTable);
     callback(outputPath, data, (val) => val);
     return data;
   });
