@@ -1,4 +1,3 @@
-
 'use strict';
 
 const Bitmap = module.exports = {};
