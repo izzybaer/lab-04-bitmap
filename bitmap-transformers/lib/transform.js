@@ -2,12 +2,14 @@
 
 const transform = module.exports = {};
 
-transform.scale = (colorTable) => {
+transform.scale = (colorTable,colorTarget) => {
   for (var i = 0; i < colorTable.length; i+= 4) {
-    colorTable[i] = 255; //Blue
-    // colorTable[i+1] = 0; //Green
-    // colorTable[i+2] = 0; //Red
-    // colorTable[i+3] = 0; // Throw
+    if(colorTarget === 'blue')
+      colorTable[i] = 255; //Blue
+    else if (colorTarget === 'green')
+      colorTable[i+1] = 0; //Green
+    else if (colorTarget === 'red') 
+      colorTable[i+2] = 0; //Red
   }
   return colorTable;
 };
