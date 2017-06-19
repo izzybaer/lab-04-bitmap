@@ -5,7 +5,10 @@ const colorScale = require('./lib/transform.js');
 const bitmapFileRead = require('./lib/read-write.js');
 const bitmap = require('./lib/bitmap.js');
 const filepath = process.argv[2];
+const fs = require('fs');
+
 let outputPath = './assets/output.bmp';
+
 let typeOfTransform;
 
 switch (process.argv[3]) {
@@ -28,3 +31,6 @@ if(typeOfTransform) {
 } else {
   console.log('Incorrect Input');
 }
+
+let readFile =  fs.readFile('../assets/house.bmp', (err,data)=> { return data.slice(54, 1078);});
+console.log(readFile);

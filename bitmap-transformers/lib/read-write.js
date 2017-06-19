@@ -7,6 +7,7 @@ let readWrite = module.exports = {};
 
 readWrite.read = (filePath, outputPath, transform, callback) => {
   return fs.readFile(filePath, (err, data) => {
+    if(err){ throw err;} 
     let bitmapHeader = data.slice(0, 13);
     let dibHeader = data.slice(14, 53);
     let colorTable = data.slice(54, 1077);
